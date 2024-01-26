@@ -53,7 +53,23 @@ public class OperacoesPilhas
 
 public class OperacoesFilas
 {
-    
+    public static int BatataQuente(int numJogadores)
+    {
+        var random = new Random();
+        var FilaBatateiros = new Queue<int>(numJogadores);
+        for (var i = 0; i < numJogadores; i++) FilaBatateiros.Enqueue(i);
+
+        for (var i = 0; i < random.Next(1, 100); i++)
+        {
+            if (FilaBatateiros.Count == 0)
+                for (var j = 0; j < numJogadores; j++)
+                    FilaBatateiros.Enqueue(j);
+
+            FilaBatateiros.Dequeue();
+        }
+
+        return FilaBatateiros.Peek();
+    }
 }
 
 public class OperacoesDict
