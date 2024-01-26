@@ -15,6 +15,7 @@ public class OperacoesListas
                 index++;
             }
         }
+
         return input;
     }
 }
@@ -23,15 +24,8 @@ public class OperacoesPilhas
 {
     public static bool IsBalanced(string input)
     {
-        var parenthesesDict = new Dictionary<char, char>
-        {
-            {')', '('},
-            {'}', '{'},
-            {']', '['}
-        };
-
+        var parenthesesDict = new Dictionary<char, char> { { ')', '(' }, { '}', '{' }, { ']', '[' } };
         var stack = new Stack<char>();
-
         foreach (var letter in input)
         {
             if (parenthesesDict.ContainsKey(letter))
@@ -79,7 +73,10 @@ public class OperacoesFilas
                 FilaJogadores.Enqueue(jogadorRecente); 
             }
 
-            FilaBatateiros.Dequeue();
+            // Eliminar jogador
+            var jogadorEliminado = FilaJogadores.Dequeue();
+            Console.WriteLine($"Jogador {jogadorEliminado} foi eliminado.");
+
         }
 
         // Último jogador restante
@@ -91,5 +88,8 @@ public class OperacoesFilas
 
 public class OperacoesDict
 {
-    
+    public int ContadorPalavras()
+    {
+        
+    }
 }
