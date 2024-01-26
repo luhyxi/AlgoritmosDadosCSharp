@@ -88,7 +88,7 @@ public class OperacoesPilhasTests
     }
 }
 
-public class BatataQuenteTests
+public class OperacoesPilhaTests
 {
     [Theory]
     [InlineData(3)]
@@ -137,5 +137,28 @@ public class BatataQuenteTests
         // Assert
         Assert.InRange(result, 0, numJogadores - 1);
     }
+}
 
+public class OperacoesDictTests
+{
+    [Theory]
+    [InlineData("to be or not to be, that is the question")]
+    public void ContadorPalavras_RetornaNumeroExato(string text)
+    {
+        // Act
+        var result = OperacoesDict.ContadorPalavras(text);
+
+        // Assert
+        Assert.Equal(2, result["to"]);
+        Assert.Equal(2, result["be"]);
+        Assert.Equal(1, result["or"]);
+        Assert.Equal(1, result["not"]);
+        Assert.Equal(1, result["that"]);
+        Assert.Equal(1, result["is"]);
+        Assert.Equal(1, result["the"]);
+        Assert.Equal(1, result["question"]);
+
+
+
+    }
 }
