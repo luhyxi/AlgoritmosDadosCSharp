@@ -88,8 +88,23 @@ public class OperacoesFilas
 
 public class OperacoesDict
 {
-    public int ContadorPalavras()
+    public static Dictionary<string, int> ContadorPalavras(string input)
     {
-        
+        Dictionary<string, int> PalavrasEncontradas = [];
+        string[] inputArray = input.Split(new char[] { ' ', ',', '.' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string palavra in inputArray)
+        {
+            string palavraClean = palavra.Trim().ToLower();
+            if (!PalavrasEncontradas.ContainsKey(palavraClean))
+            {
+                PalavrasEncontradas.Add(palavraClean, 1);
+            }
+            else
+            {
+                PalavrasEncontradas[palavraClean]++;
+            }
+        }
+        return PalavrasEncontradas;
     }
 }
+
