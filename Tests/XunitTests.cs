@@ -5,7 +5,7 @@ namespace Tests;
 public class OperacoesListasTests
 {
     [Fact]
-    public void TenOrMoreChars_RemovesStringsLessThanTenChars()
+    public void TenOrMoreChars_RemoverPalavrasMenosQueDezLetras()
     {
         // Arrange
         var input = new List<string>
@@ -78,7 +78,7 @@ public class OperacoesPilhasTests
 
     [Theory]
     [MemberData(nameof(TestData))]
-    public void TestIsBalanced(string input, bool expectedResult)
+    public void IsBalanced_RetornaResultadoValido(string input, bool expectedResult)
     {
         // Act
         var result = OperacoesPilhas.IsBalanced(input);
@@ -86,4 +86,56 @@ public class OperacoesPilhasTests
         // Assert
         Assert.Equal(expectedResult, result);
     }
+}
+
+public class BatataQuenteTests
+{
+    [Theory]
+    [InlineData(3)]
+    [InlineData(5)]
+    public void BatataQuente_RetornaResultadoValido(int numJogadores)
+    {
+        // Act
+        var result = OperacoesFilas.BatataQuente(numJogadores);
+
+        // Assert
+        Assert.InRange(result - 1, 0, numJogadores - 1);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(-40)]
+    public void BatataQuente_ZeroOuMenorThrowException(int numJogadores)
+    {
+        // Arrange + Act + Assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => OperacoesFilas.BatataQuente(numJogadores));
+    }
+
+    [Theory]
+    [InlineData(2)]
+    [InlineData(4)]
+    [InlineData(6)]
+    public void BatataQuente_RetornaResultadoDentroNumeroPlayers(int numJogadores)
+    {
+        // Act
+        var result = OperacoesFilas.BatataQuente(numJogadores);
+
+        // Assert
+        Assert.True(result >= 0 && result <= numJogadores);
+    }
+
+    [Theory]
+    [InlineData(10)]
+    [InlineData(20)]
+    [InlineData(50)]
+    public void BatataQuente_RetornaResultadoVariosJogadores(int numJogadores)
+    {
+        // Act
+        var result = OperacoesFilas.BatataQuente(numJogadores);
+
+        // Assert
+        Assert.InRange(result, 0, numJogadores - 1);
+    }
+
 }
