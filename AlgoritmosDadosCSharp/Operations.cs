@@ -55,21 +55,38 @@ public class OperacoesFilas
 {
     public static int BatataQuente(int numJogadores)
     {
-        var random = new Random();
-        var FilaBatateiros = new Queue<int>(numJogadores);
-        for (var i = 0; i < numJogadores; i++) FilaBatateiros.Enqueue(i);
+        // Test cases
+        if (numJogadores <= 1)
+            throw new ArgumentOutOfRangeException(nameof(numJogadores),
+                "Numero de jogadores deve ser positivo e maior que um");
 
-        for (var i = 0; i < random.Next(1, 100); i++)
+        var passesRandom = new Random();
+
+        var FilaJogadores = new Queue<int>();
+
+        // Coloca os Jogadores em seus postos
+        for (var i = 1; i <= numJogadores; i++) FilaJogadores.Enqueue(i);
+
+        // Jogo
+        while (FilaJogadores.Count > 1)
         {
-            if (FilaBatateiros.Count == 0)
-                for (var j = 0; j < numJogadores; j++)
-                    FilaBatateiros.Enqueue(j);
+            var passes = passesRandom.Next(1, 100);
+
+            // Passar a batata dentre jogadores
+            for (var i = 0; i < passes; i++)
+            {
+                var jogadorRecente = FilaJogadores.Dequeue();
+                FilaJogadores.Enqueue(jogadorRecente); 
+            }
 
             FilaBatateiros.Dequeue();
         }
 
-        return FilaBatateiros.Peek();
+        // Último jogador restante
+        return FilaJogadores.Dequeue();
     }
+
+
 }
 
 public class OperacoesDict
